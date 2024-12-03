@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Nasıl Bakılır?";
+}
+
+<div class="header">
+    <h2>Tarot Kartlarına Nasıl Bakılır?</h2>
+</div>
+
+<div class="how-to-read-container">
+    <section class="reading-method" id="singleCard">
+        <h3>Tek Kart Tarot Bakımı</h3>
+        <p>
+            Tek kart tarot bakımı, günlük rehberlik almak veya bir soruya net bir cevap aramak için idealdir. Kart, o anki enerjinizi ve size verilen mesajı temsil eder.
+        </p>
+        <a href="@Url.Action("SingleCardSpread", "Tarot")" class="btn-read">Tek Kart Bak</a>
+    </section>
+
+    <section class="reading-method" id="threeCards">
+        <h3>3 Kart Tarot Bakımı</h3>
+        <p>
+            3 kart tarot yayılımı, geçmiş, şimdi ve geleceği anlamanızı sağlar. İlk kart geçmişi, ikinci kart şu anki durumu, üçüncü kart ise gelecekte olabilecekleri gösterir.
+        </p>
+        <a href="@Url.Action("ThreeCardSpread", "Tarot")" class="btn-read">3 Kart Bak</a>
+    </section>
+
+    <section class="reading-method" id="sevenCards">
+        <h3>7 Kart Tarot Bakımı</h3>
+        <p>
+            7 kart tarot yayılımı, daha derin bir analiz gerektiren durumlar için kullanılır. Bu yayılım, bir durumun arkasındaki sebep, mevcut enerji ve olası sonuçlar üzerinde durur.
+        </p>
+        <a href="@Url.Action("SevenCardSpread", "Tarot")" class="btn-read">7 Kart Bak</a>
+    </section>
+
+    <section class="reading-method" id="customSpread">
+        <h3>Daha Fazla Kart ile Özel Yayılımlar</h3>
+        <p>
+            Özel yayılımlar, belirli bir konuda derinlemesine bilgi edinmek için tasarlanır. 10 kartlık Kelt Haçı yayılımı veya ilişkiler için 5 kartlık yayılım gibi farklı kombinasyonlar kullanılabilir.
+            Daha fazlası için kayıt olun ve falcılarımızla iletişime geçin.
+        </p>
+        <a href="@Url.Action("Index", "Register")" class="btn-register">Kayıt Ol</a>
+    </section>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Nasilbakilir.css" />
+}

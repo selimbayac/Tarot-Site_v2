@@ -1,0 +1,164 @@
+﻿@model SelTarot.DtoLayer.Dtos.AppUserDtos.AppUserRegisterDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Kullanıcı Kaydı</title>
+    <style>
+        /* Genel sıfırlama ve kutu modeli */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Arka plan ve sayfa düzeni */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('/images/Background/LoginRegister.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+        }
+
+        /* Kayıt formu kutusu */
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+            /* Başlık stilleri */
+            .container h1 {
+                font-size: 28px;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            .container h2 {
+                font-size: 20px;
+                color: #666;
+                margin-bottom: 20px;
+            }
+
+            /* Etiket ve giriş kutuları */
+            .container label {
+                display: block;
+                font-size: 14px;
+                font-weight: bold;
+                color: #555;
+                margin-bottom: 8px;
+            }
+
+            .container input[type="text"],
+            .container input[type="email"],
+            .container input[type="password"] {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+
+            .container input[type="checkbox"] {
+                margin-right: 10px;
+            }
+
+        /* Hata mesajları */
+        .validation-errors {
+            color: #d9534f;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        /* Şartlar ve buton */
+        .terms-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .container button:hover {
+                background-color: #45a049;
+            }
+
+        /* Linkler */
+        .container .link-container {
+            margin-top: 10px;
+        }
+
+        .container a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+            .container a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sel Tarot</h1>
+        <h2>Yeni Kullanıcı Kaydı</h2>
+        <form asp-action="Index" asp-controller="Register" method="post">
+            <label for="username">Kullanıcı Adı</label>
+            <input type="text" asp-for="UserName" id="username" name="UserName" placeholder="Kullanıcı adınızı giriniz" required>
+
+            <label for="email">E-posta</label>
+            <input type="email" asp-for="Email" id="email" name="Email" placeholder="E-posta adresinizi giriniz" required>
+
+            <label for="password">Şifre</label>
+            <input type="password" asp-for="Password" id="password" name="Password" placeholder="Şifrenizi giriniz" required>
+
+            <label for="confirm-password">Şifre Tekrarı</label>
+            <input type="password" asp-for="ConfirmPassword" id="confirm-password" name="ConfirmPassword" placeholder="Şifrenizi tekrar giriniz" required>
+
+            <div class="validation-errors" asp-validation-summary="ModelOnly"></div>
+
+            <div class="terms-container">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Kullanım şartlarını okudum ve kabul ediyorum</label>
+            </div>
+
+            <button type="submit">Kayıt Ol</button>
+
+            <div class="link-container">
+           
+                <a asp-area="" asp-controller="Login" asp-action="Index">Hesabınız var mı? Giriş yap</a>
+            </div>
+
+            <div class="link-container">
+                <a asp-area="" asp-controller="Home" asp-action="Index">Ana sayfaya dön</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

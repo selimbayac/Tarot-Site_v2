@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SelTarot.Models.TarotCard>
+
+<h2>Seçtiğiniz Kartların Yorumları</h2>
+
+<div class="card-results">
+    @foreach (var card in Model)
+    {
+        <div class="card">
+            <img src="@Url.Content(card.ImagePath)" alt="@card.Name" />
+            <div class="card-content">
+                <h3>@card.Name</h3>
+                <p class="description">@card.Description</p>
+                <p><strong>Ek Yorum:</strong> @card.AdditionalMeaning</p>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Menüye Geri Dönüş Bağlantısı -->
+<div class="back-to-menu">
+    <a href="@Url.Action("SevenCardSpread", "Tarot")" class="btn-return">Yeni Kart Çek</a>
+</div>
+
+<style>
+    .card-results {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 180px;
+        text-align: center;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card h3 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .card p {
+        font-size: 0.9em;
+        color: #666;
+        line-height: 1.4em;
+    }
+
+    .back-to-menu {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn-return {
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-return:hover {
+            background-color: #555;
+        }
+</style>

@@ -1,0 +1,32 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Genel Stiller -->
+  
+    <link rel="stylesheet" href="~/css/layout.css" />
+    <link rel="stylesheet" href="~/css/navbar.css" />
+
+    <!-- Sayfaya Özgü Stiller -->
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        @Html.Partial("_Header")
+    </header>
+    <main class="container">
+        @RenderBody()
+    </main>
+    <footer>
+        @Html.Partial("_Footer")
+    </footer>
+
+    <!-- Genel JS Dosyaları -->
+    <script src="~/js/site.js"></script>
+    <script src="~/js/layout.js"></script>
+    <script src="~/js/navbar.js"></script>
+
+    <!-- Sayfaya Özgü JS -->
+    @RenderSection("Scripts", required: false)
+</body>

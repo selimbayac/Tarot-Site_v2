@@ -1,0 +1,53 @@
+﻿@{
+    var isAdmin = User.IsInRole("Admin");
+    var isFortuneTeller = User.IsInRole("Falcı");
+    var isUser = User.Identity.IsAuthenticated;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+<nav class="navbar">
+    <div class="logo">
+        <img src="/images/Logo/Logo.jpeg" alt="SelTarot Logo" class="logo-image">
+        <span class="logo-text">SelTarot</span>
+    </div>
+
+    <!-- Hamburger Menü Checkbox -->
+    <input type="checkbox" id="menuBtn" />
+
+    <!-- Hamburger Menü Butonu -->
+    <label for="menuBtn" class="menuBtn">
+        <i class="fas fa-bars"></i>
+    </label>
+
+    <!-- Menü Linkleri -->
+    <ul>        
+        <li><a href="@Url.Action("Index", "Home")">Anasayfa</a></li>
+        <li><a href="@Url.Action("SevenCardSpread", "Tarot")">7 Tarot Bak</a></li>
+        <li><a href="@Url.Action("ThreeCardSpread", "Tarot")">3 Tarot Bak</a></li>
+        <li><a href="@Url.Action("SingleCardSpread", "Tarot")">Tek Kart Tarot Bak</a></li>
+
+        <!-- Oturum Durumu -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a href="@Url.Action("Inbox", "Message")">Mesaj Kutusu</a></li>
+            <li><span>Hoşgeldin, @User.Identity.Name!</span></li>
+            @if (isFortuneTeller)
+            {
+                <li><a href="@Url.Action("FortuneTellerInbox", "Message")">Gelen Kutusu</a></li>
+            }
+            @if (isAdmin)
+            {
+                <li><a href="@Url.Action("UserManagement", "Admin")">Kullanıcı Yönetimi</a></li>
+            }
+        }
+        else
+        {
+            <li><a href="@Url.Action("Index", "Login")">Giriş Yap</a></li>
+            <li><a href="@Url.Action("Index", "Register")">Kayıt Ol</a></li>
+        }
+    </ul>
+</nav>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/navbar.css" />
+}

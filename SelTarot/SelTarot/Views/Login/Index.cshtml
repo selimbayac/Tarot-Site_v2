@@ -1,0 +1,114 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Kullanıcı Kaydı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('/images/Background/LoginRegister.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%; /* Mobil cihazlar için */
+        }
+
+            .container h1 {
+                font-size: 28px;
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .container h2 {
+                margin-bottom: 20px;
+                font-size: 20px;
+                color: #666;
+            }
+
+            .container label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+                color: #444;
+            }
+
+            .container input[type="text"],
+            .container input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+
+            .container button {
+                width: 100%;
+                padding: 12px;
+                border: none;
+                border-radius: 6px;
+                background-color: #4CAF50;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .container button:hover {
+                    background-color: #45a049;
+                }
+
+            .container a {
+                color: #007BFF;
+                text-decoration: none;
+                font-size: 14px;
+            }
+
+                .container a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Sel Tarot</h1>
+        <h2>Giriş Kaydı</h2>
+        <form asp-action="Login" asp-controller="Login" method="post">
+            <label for="username">Kullanıcı Adı</label>
+            <input asp-for="Usarname" placeholder="Kullanıcı Adınız" required>
+
+            <label for="password">Şifre</label>
+            <input type="password" asp-for="Password" id="password" placeholder="Şifreniz" required>
+
+            <button type="submit">Giriş Yap</button>
+        </form>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="link-container">
+            <a class="nav-link" asp-area="" asp-controller="Register" asp-action="Index">Kaydol</a>
+        </div>
+    </div>
+</body>
+</html>

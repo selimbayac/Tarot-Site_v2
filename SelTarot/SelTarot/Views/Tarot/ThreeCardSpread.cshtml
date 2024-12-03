@@ -1,0 +1,40 @@
+﻿@model List<SelTarot.Models.TarotCard>
+<meta charset="UTF-8">
+
+<h1>3 Kart Yayılımı </h1>
+<h4 class="tarot-guidance">
+
+    Tarot kartlarını seçmeden önce aklınızdaki soruyu iyice netleştirmelisiniz ve seçeceğiniz kartlara odaklandığınızdan emin olmalısınız. Bunun bir enerji ve meditasyon anı olduğunu aklınızdan çıkarmayın. Zihninizi mümkün olduğunca boşaltın ve düşüncelerden, yargılardan kurtulduğunuza emin olun.
+
+    Seçtiğiniz yedi kartın yorumunu birbiriyle bağlantılı olarak değerlendirmelisiniz ve nihai görüntünün hayalinizde belirmesine izin vermelisiniz.
+</h4>
+
+<!-- Karıştırma Düğmesi -->
+<button id="shuffleButton" type="button">Kartları Karıştır</button>
+
+<!-- Kart Matris -->
+<form id="tarotForm" method="post" asp-controller="Tarot" asp-action="RevealCards">
+    <div class="grid-container" id="cardGrid">
+        @foreach (var card in Model)
+        {
+            <div class="grid-item" data-card-id="@card.Id">
+                <input type="checkbox" name="selectedCardIds" value="@card.Id" id="card-@card.Id" class="hidden-checkbox" />
+                <label for="card-@card.Id">
+                    <img src="~/images/tarot_cards/placeholder.jpg" alt="Placeholder" />                   
+                </label>
+            </div>
+        }
+    </div>
+    <button type="submit" id="submitButton" disabled>Kartları Aç</button>
+</form>
+
+<!-- Kart Sonuçları Bölümü -->
+<div id="cardResults"></div>
+
+@section Scripts {
+    <script src="~/js/tarot3.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/tarot7.css" />
+}

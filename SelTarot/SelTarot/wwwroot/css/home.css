@@ -1,0 +1,151 @@
+﻿/* Genel Body Stilleri */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 60px; /* Sabit navbar için boşluk */
+    background: url('/images/Background/background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #333; /* Genel yazı rengi */
+}
+
+/* Container Ayarları */
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* Yarı saydam beyaz */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 100px; /* Üstten boşluk */
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Başlıklar */
+h3 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2rem;
+    color: #ffeb3b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+/* Tablo Stili */
+.table {
+    width: 100%;
+    background-color: #f9f9f9;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .table th {
+        background-color: rgba(127, 140, 141, 0.8); /* Daha koyu gri transparan */
+        color: #fff;
+        font-weight: bold;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .table td {
+        background-color: #ecf0f1; /* Açık gri hücreler */
+        color: #333;
+        padding: 15px;
+        border: 1px solid #bdc3c7;
+        text-align: center;
+    }
+
+/* Kart Görselleri */
+.tarot-img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease; /* Hover efekti için */
+}
+
+    .tarot-img:hover {
+        transform: scale(1.1); /* Hoverda büyüme efekti */
+    }
+
+/* Description ve Metin */
+.table td p {
+    font-size: 14px; /* Font boyutu */
+    line-height: 1.5; /* Satır yüksekliği */
+    margin: 0;
+    max-width: 100%;
+    word-wrap: break-word; /* Kelimeler taşarsa yeni satıra geçsin */
+}
+
+/* Mobilde Tablo Kaydırılabilir Yapma */
+.table-responsive {
+    overflow-x: auto; /* Yatay kaydırma ekler */
+    -webkit-overflow-scrolling: touch; /* Dokunmatik cihazlarda düzgün kaydırma */
+}
+
+/* Tablo Minimum Genişlik Ayarları */
+.table {
+    min-width: 600px; /* Tablo hücrelerinin minimum genişliği */
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    /* Container ve Başlıklar */
+    .container {
+        padding: 10px;
+        margin-top: 80px;
+    }
+
+    .tarot-img {
+        width: 120px;
+        height: 160px;
+    }
+
+    h1, h2 {
+        font-size: 22px;
+    }
+
+    /* Tablo Stili */
+    .table th, .table td {
+        padding: 12px;
+    }
+
+    .table th {
+        font-size: 14px;
+    }
+
+    .table td {
+        font-size: 12px;
+    }
+
+        /* Description kısmındaki yazıları daha okunabilir yapmak için */
+        .table td p {
+            font-size: 14px; /* Mobilde daha büyük metin */
+            line-height: 1.4; /* Satır aralığını arttırdık */
+            word-wrap: break-word; /* Uzun kelimeleri kırarak yeni satıra al */
+            max-width: 100%;
+            overflow-wrap: break-word; /* Kelimeleri sarmak için */
+        }
+}
+
+/* Tablet Uyumluluğu (768px - 1024px arası) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    h1, h2 {
+        font-size: 26px;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+    }
+
+    .tarot-img {
+        width: 140px;
+        height: 180px;
+    }
+}

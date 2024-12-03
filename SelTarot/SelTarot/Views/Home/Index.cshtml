@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Ana Sayfa";
+}
+
+
+
+<div class="container"
+<h3 style="text-align: center; margin: 20px 0; font-size: 2rem; color: #ffeb3b; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+    <a href="@Url.Action("NasilBakilir", "Tarot")" style="text-decoration: none; color: #ffeb3b; transition: color 0.3s ease, transform 0.3s ease;">
+        Nasıl Bakılır
+    </a>
+</h3>
+    <h2>Tarot Kartlarının Anlamları</h2>
+    <div class="table-responsive">
+        <!-- Tablo kaydırılabilir hale geliyor -->
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>İsim ve Görsel</th>
+                    <th>Açıklama</th>
+                    <th>Ek Anlam</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in ViewBag.Cards)
+                {
+                    <tr>
+                        <td>
+                            <h2>@card.Name</h2>
+                            @if (!string.IsNullOrEmpty(card.ImagePath))
+                            {
+                                <img src="@card.ImagePath" alt="@card.Name" class="img-fluid tarot-img" />
+                            }
+                        </td>
+                        <td>
+                            <p>@card.Description</p>
+                        </td>
+                        <td>
+                            <p>@card.AdditionalMeaning</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+}
+
+@section Scripts {
+    <script src="~/js/home.js"></script>
+}

@@ -1,0 +1,230 @@
+﻿@model IEnumerable<SelTarot.Models.UserManagementViewModel>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        /* Genel Ayarlar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table thead {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        table thead th {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        table tbody tr {
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table tbody td {
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 6px;
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .badge.bg-primary {
+            background-color: #007bff;
+        }
+
+        .badge.bg-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            font-size: 12px;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-dark {
+            background-color: #343a40;
+        }
+
+        .btn-dark:hover {
+            background-color: #23272b;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+      
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Management</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>
+                            @if (user.Roles != null && user.Roles.Any())
+                            {
+                                @foreach (var role in user.Roles)
+                                {
+                                    <span class="badge bg-primary">@role</span>
+                                }
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">No roles assigned</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                @if (!user.Roles.Contains("Falcı"))
+                                {
+                                    <form asp-action="AssignFortuneTellerRole" asp-route-userId="@user.UserId" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-success">Make Fortune Teller</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="RemoveFortuneTellerRole" asp-route-userId="@user.UserId" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-warning">Remove Fortune Teller</button>
+                                    </form>
+                                }
+
+                                @if (!user.Roles.Contains("Admin"))
+                                {
+                                    <form asp-action="AssignAdminRole" asp-route-userId="@user.UserId" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-info">Make Admin</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="RemoveAdminRole" asp-route-userId="@user.UserId" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-dark">Remove Admin</button>
+                                    </form>
+                                }
+
+                                <form asp-action="DeleteUser" asp-route-userId="@user.UserId" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

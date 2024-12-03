@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Tek Kart Yayılımı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cards = ViewBag.Cards as List<SelTarot.Models.TarotCard>;
+}
+
+
+<h1>Tek Kart Yayılımı</h1>
+<h4 class="tarot-guidance">
+    Tek kart tarot açılımı nedir?
+    Tek kart tarot açılımı, sorduğunuz soruya olumlu ya da olumsuz NET bir yanıt almak için bakılır. Önemli bir karar aşamasındaysanız; ikilemde kaldığınız ya da aklınızı kurcalayan konular var ise fikir vermesi açısından bu açılım tercih edilir.
+
+    Cevabı EVET ya da HAYIR olan bir soruya odaklanın ve ardından kartınızı seçin.
+</h4>
+<!-- Karıştırma Düğmesi -->
+<button id="shuffleButton">Kartları Karıştır</button>
+
+<!-- Kart Matris -->
+<form id="tarotForm" method="post" asp-controller="Tarot" asp-action="RevealSingleCard">
+    <div class="grid-container" id="cardGrid">
+        @foreach (var card in cards)
+        {
+            <div class="grid-item" data-card-id="@card.Id">
+                <input type="checkbox" name="selectedCardIds" value="@card.Id" id="card-@card.Id" class="hidden-checkbox" />
+                <label for="card-@card.Id">
+                    <img src="~/images/tarot_cards/placeholder.jpg" alt="Placeholder" />
+                   
+                </label>
+            </div>
+        }
+    </div>
+    <button type="submit">Kartı Aç</button>
+</form>
+
+<!-- Kart Sonuçları Bölümü -->
+<div id="cardResults"></div>
+
+@section Scripts {
+    <script src="~/js/tarot1.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/tarot7.css" />
+}
