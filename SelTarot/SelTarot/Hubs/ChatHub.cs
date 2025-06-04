@@ -26,8 +26,9 @@ namespace SelTarot.Hubs
 
             await _messageService.SendMessageAsync(message);
 
-            // Mesajı alıcıya gönder
+            // Mesajı hem alıcıya hem de gonderene ilet
             await Clients.User(receiverId.ToString()).SendAsync("ReceiveMessage", senderId, messageContent);
+            await Clients.User(senderId.ToString()).SendAsync("ReceiveMessage", senderId, messageContent);
         }
     }
 }

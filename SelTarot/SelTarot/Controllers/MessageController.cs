@@ -186,4 +186,23 @@ public class MessageController : Controller
         return View();
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Conversation(int receiverId)
+    {
+        var senderId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var messages = await _messageService.GetMessagesBetweenUsersAsync(senderId, receiverId);
+        var result = messages.Select(m => new MessageViewModel
+        {
+            Id = m.Id,
+            SenderUserName = m.Sender.UserName,
+            ReceiverUserName = m.Receiver.UserName,
+            Content = m.Content,
+            SentDate = m.SentDate,
+            SenderId = m.SenderId,
+            ReceiverId = m.ReceiverId
+        });
+
+        return Json(result);
+    }
+
 }
