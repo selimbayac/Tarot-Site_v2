@@ -1,20 +1,68 @@
-﻿<div class="container">
-    <h1>Gelen Kutusu</h1>
-    <ul id="messageList"></ul>
-
-    <h3>Yeni Mesaj Gönder</h3>
-    <div class="form-group">
-        <label for="receiverId">Falcı Seçin:</label>
-        <select id="receiverId" class="form-control">
-            @foreach (var user in Model.Users)
+@{
+    ViewData["Title"] = "Mesajlaşma";
+    var currentUserId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+}
+<div class="container py-3">
+    <h3 class="text-center mb-3">Mesajlaşma</h3>
+    <div class="mb-2">
+        <label for="receiverId" class="form-label">Kullanıcı Seç</label>
+        <select id="receiverId" class="form-select">
+            @foreach (var user in ViewBag.FalciList)
             {
                 <option value="@user.Id">@user.UserName</option>
             }
         </select>
     </div>
-    <div class="form-group">
-        <label for="messageInput">Mesaj:</label>
-        <textarea id="messageInput" class="form-control"></textarea>
+    <ul id="messageList" class="list-group mb-3" style="max-height:300px; overflow-y:auto;"></ul>
+    <div class="input-group">
+        <textarea id="messageInput" class="form-control" placeholder="Mesajınızı yazın..." rows="2"></textarea>
+        <button class="btn btn-primary" onclick="sendMessage()">Gönder</button>
     </div>
-    <button onclick="sendMessage()" class="btn btn-primary">Gönder</button>
 </div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.14/signalr.min.js"></script>
+    <script>
+        const currentUserId = '@currentUserId';
+        const connection = new signalR.HubConnectionBuilder().withUrl('/chatHub').build();
+        connection.start().catch(err => console.error(err.toString()));
+
+        connection.on('ReceiveMessage', function (senderId, messageContent) {
+            const messageList = document.getElementById('messageList');
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.textContent = senderId + ': ' + messageContent;
+            messageList.appendChild(li);
+        });
+
+        function loadConversation(receiverId) {
+            fetch('/Message/Conversation?receiverId=' + receiverId)
+                .then(r => r.json())
+                .then(data => {
+                    const messageList = document.getElementById('messageList');
+                    messageList.innerHTML = '';
+                    data.forEach(msg => {
+                        const li = document.createElement('li');
+                        li.className = 'list-group-item';
+                        li.textContent = msg.senderUserName + ': ' + msg.content;
+                        messageList.appendChild(li);
+                    });
+                });
+        }
+
+        document.getElementById('receiverId').addEventListener('change', function () {
+            loadConversation(this.value);
+        });
+
+        loadConversation(document.getElementById('receiverId').value);
+
+        function sendMessage() {
+            const receiverId = document.getElementById('receiverId').value;
+            const messageContent = document.getElementById('messageInput').value;
+            if (messageContent.trim() === '') return;
+            connection.invoke('SendMessage', currentUserId, receiverId, messageContent)
+                .catch(err => console.error(err.toString()));
+            document.getElementById('messageInput').value = '';
+        }
+    </script>
+}
